@@ -4,7 +4,14 @@ import About from './sections/About.jsx'
 import Portfolio from './sections/Portfolio.jsx'
 import Experience from './sections/Experience.jsx'
 import Contact from './sections/Contact.jsx'
-import { GitHubIcon, LinkedInIcon, MailIcon, MenuIcon, CloseIcon } from './icons.jsx'
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  MailIcon,
+  FileIcon,
+  MenuIcon,
+  CloseIcon,
+} from './icons.jsx'
 
 const SECTIONS = [
   { id: 'about', label: 'About me', view: About },
@@ -21,6 +28,11 @@ const SOCIALS = [
     Icon: LinkedInIcon,
   },
   { label: 'Email', href: 'mailto:oumartambatirera@gmail.com', Icon: MailIcon },
+  {
+    label: 'Résumé',
+    href: 'https://drive.google.com/file/d/1IfjgUhibxvkNGU3nq41l4MgX1XfmOdSP/view?usp=sharing',
+    Icon: FileIcon,
+  },
 ]
 
 function currentSection() {
