@@ -1,4 +1,5 @@
 import { CodeIcon } from '../icons.jsx'
+import portrait from '../assets/portrait.jpeg'
 
 function Heading({ children }) {
   return (
@@ -69,13 +70,19 @@ export default function About() {
           </p>
         </div>
 
-        <div className="glass flex aspect-[4/5] max-w-[300px] flex-col items-center justify-center gap-6 rounded-3xl">
-          <span className="display text-7xl text-paper/90">OT</span>
-          <div className="woven w-32" aria-hidden="true" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/50">
-            Est. 2024 · Greater Noida
-          </span>
-        </div>
+        <figure className="glass max-w-[300px] rounded-3xl p-2.5">
+          <img
+            src={portrait}
+            alt="Oumar Tirera"
+            className="aspect-[4/5] w-full rounded-[1.15rem] object-cover object-[50%_18%]"
+          />
+          <figcaption className="flex items-center justify-between px-2 pb-1.5 pt-3">
+            <div className="woven w-24" aria-hidden="true" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/50">
+              Greater Noida
+            </span>
+          </figcaption>
+        </figure>
       </div>
 
       <div className="grid gap-6 xl:grid-cols-2">
