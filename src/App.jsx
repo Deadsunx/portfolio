@@ -5,34 +5,36 @@ import Contact from './components/Contact.jsx'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-paper font-sans text-ink antialiased">
-      <header className="mx-auto flex max-w-[1060px] items-baseline justify-between px-6 pt-8 font-mono text-[13px]">
-        <span className="font-medium tracking-wide">Oumar Tirera</span>
-        <nav className="flex gap-6 text-graphite">
-          <a href="#projects" className="hover:text-indigo">
+    <div className="night-sky grain min-h-screen font-sans text-paper antialiased">
+      <header className="fixed inset-x-0 top-5 z-50 flex justify-center px-4">
+        <nav className="glass flex items-center gap-6 rounded-full px-6 py-3 font-mono text-[13px]">
+          <a href="#top" className="font-medium tracking-wide hover:text-ochre">
+            Oumar Tirera
+          </a>
+          <span className="h-4 w-px bg-paper/20" aria-hidden="true" />
+          <a href="#projects" className="text-paper/70 hover:text-paper">
             Projects
           </a>
-          <a href="#contact" className="hover:text-indigo">
+          <a href="#contact" className="text-paper/70 hover:text-paper">
             Contact
           </a>
           <a
             href="https://github.com/Deadsunx"
             target="_blank"
             rel="noreferrer"
-            className="hover:text-indigo"
+            className="text-paper/70 hover:text-paper"
           >
             GitHub
           </a>
         </nav>
       </header>
 
-      <main className="mx-auto max-w-[1060px] px-6">
+      <main id="top" className="mx-auto max-w-[1060px] px-6">
         <Hero />
         <TechStack />
         <Projects />
+        <Contact />
       </main>
-
-      <Contact />
     </div>
   )
 }

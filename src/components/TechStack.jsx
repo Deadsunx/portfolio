@@ -1,10 +1,10 @@
 import { motion, useReducedMotion } from 'framer-motion'
 
 const groups = [
-  { label: 'Languages', items: 'Python · Java · C++' },
-  { label: 'Web', items: 'React · Node.js · SQL' },
-  { label: 'AI & agents', items: 'LangChain · CrewAI' },
-  { label: 'Foundations', items: 'OOP · DBMS · Operating Systems' },
+  { label: 'Languages', items: ['Python', 'Java', 'C++'] },
+  { label: 'Web', items: ['React', 'Node.js', 'SQL'] },
+  { label: 'AI & agents', items: ['LangChain', 'CrewAI'] },
+  { label: 'Foundations', items: ['OOP', 'DBMS', 'Operating Systems'] },
 ]
 
 export default function TechStack() {
@@ -16,22 +16,33 @@ export default function TechStack() {
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
       aria-label="Toolbox"
-      className="border-t border-ink/15 py-16"
+      className="py-14"
     >
-      <h2 className="font-mono text-[13px] uppercase tracking-[0.2em] text-graphite">
+      <h2 className="font-mono text-[13px] uppercase tracking-[0.2em] text-paper/50">
         Toolbox
       </h2>
-      <dl className="mt-8 max-w-[720px]">
+      <div className="mt-8 flex flex-col gap-6">
         {groups.map((group) => (
           <div
             key={group.label}
-            className="grid grid-cols-1 gap-1 border-b border-dotted border-indigo/30 py-4 last:border-b-0 sm:grid-cols-[180px_1fr] sm:gap-6"
+            className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-8"
           >
-            <dt className="font-mono text-[13px] text-indigo">{group.label}</dt>
-            <dd className="text-[17px] font-medium">{group.items}</dd>
+            <span className="w-[150px] shrink-0 font-mono text-[13px] text-ochre">
+              {group.label}
+            </span>
+            <div className="flex flex-wrap gap-2.5">
+              {group.items.map((item) => (
+                <span
+                  key={item}
+                  className="glass-deep rounded-full px-4 py-1.5 text-[14px] font-medium"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
-      </dl>
+      </div>
     </motion.section>
   )
 }

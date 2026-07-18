@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f6f5f0;
-  --color-ink: #1c1b16;
-  --color-indigo: #27357f;
-  --color-ochre: #c08a2d;
-  --color-graphite: #6e6c63;
+  --color-night: #10142d;
+  --color-paper: #f2f1ec;
+  --color-indigo: #4553b8;
+  --color-indigo-deep: #27357f;
+  --color-ochre: #d9a441;
   --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 }
@@ -21,12 +21,12 @@ html {
 }
 
 ::selection {
-  background: var(--color-indigo);
-  color: var(--color-paper);
+  background: var(--color-ochre);
+  color: var(--color-night);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-indigo);
+  outline: 2px solid var(--color-ochre);
   outline-offset: 3px;
 }
 
@@ -37,6 +37,59 @@ html {
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 0.95;
+}
+
+/* Liquid glass: blur + saturation lensing, lit top rim, soft inner glow, deep drop */
+.glass {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.02)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  backdrop-filter: blur(24px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.06),
+    inset 1px 0 0 rgba(255, 255, 255, 0.1),
+    0 12px 40px rgba(5, 8, 24, 0.45);
+}
+
+.glass-deep {
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.03) 45%,
+    rgba(255, 255, 255, 0.01)
+  );
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+    0 16px 48px rgba(5, 8, 24, 0.5);
+}
+
+/* Evening light behind the glass */
+.night-sky {
+  background-color: var(--color-night);
+  background-image:
+    radial-gradient(900px circle at 85% -5%, rgba(217, 164, 65, 0.17), transparent 60%),
+    radial-gradient(1100px circle at 8% 18%, rgba(69, 83, 184, 0.32), transparent 65%),
+    radial-gradient(900px circle at 70% 95%, rgba(39, 53, 127, 0.55), transparent 60%);
+}
+
+/* Fine grain so surfaces read as material, not vector fill */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Signature: strip-woven band — three dashed rows, three rhythms */
@@ -56,28 +109,9 @@ html {
         transparent 10px 15px
       )
       center / 100% 4px no-repeat,
-    repeating-linear-gradient(90deg, var(--color-ink) 0 3px, transparent 3px 11px)
-      bottom / 100% 4px no-repeat;
-}
-
-.woven--on-indigo {
-  background:
     repeating-linear-gradient(
         90deg,
-        var(--color-paper) 0 14px,
-        transparent 14px 22px
-      )
-      top / 100% 4px no-repeat,
-    repeating-linear-gradient(
-        90deg,
-        transparent 0 4px,
-        var(--color-ochre) 4px 10px,
-        transparent 10px 15px
-      )
-      center / 100% 4px no-repeat,
-    repeating-linear-gradient(
-        90deg,
-        var(--color-paper) 0 3px,
+        rgba(242, 241, 236, 0.85) 0 3px,
         transparent 3px 11px
       )
       bottom / 100% 4px no-repeat;

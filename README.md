@@ -4,7 +4,7 @@
 
 Personal portfolio of Oumar Tirera, B.Tech CSE (AI/ML) student at Sharda University.
 
-The design draws on West African strip-woven cloth: a bone-white page, deep indigo as the single accent, and a woven dash motif that underlines the name and caps the footer. Type is Archivo (expanded for display) with IBM Plex Mono for labels.
+The design sets a liquid-glass material — floating pill nav, lensed buttons, glass panels with lit rims (`backdrop-filter: blur + saturate`) — over a deep indigo evening with warm ochre light. A strip-woven dash motif, drawn from West African indigo cloth, underlines the name and caps the contact panel. Type is Archivo (expanded for display) with IBM Plex Mono for labels.
 
 ## Stack
 

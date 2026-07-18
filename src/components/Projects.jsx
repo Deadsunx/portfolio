@@ -23,37 +23,43 @@ const projects = [
   },
 ]
 
-function Row({ project }) {
+function Card({ project }) {
+  const reduce = useReducedMotion()
   const inner = (
-    <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-[1fr_260px] md:gap-10">
+    <>
       <div>
-        <h3 className="display text-[clamp(1.6rem,3.5vw,2.4rem)]">{project.title}</h3>
-        <p className="mt-4 max-w-[560px] leading-relaxed text-ink/75 transition-colors group-hover:text-paper/85">
-          {project.description}
-        </p>
+        <h3 className="display text-[clamp(1.5rem,3vw,2.1rem)]">{project.title}</h3>
+        <p className="mt-4 leading-relaxed text-paper/70">{project.description}</p>
       </div>
-      <div className="flex flex-row items-start justify-between gap-2 font-mono text-[13px] md:flex-col md:text-right">
-        <span className="text-graphite transition-colors group-hover:text-paper/70 md:self-end">
-          {project.tags}
-        </span>
-        {project.note && (
-          <span className="text-indigo transition-colors group-hover:text-ochre md:self-end">
-            {project.note}
-          </span>
-        )}
+      <div className="mt-8 flex items-baseline justify-between gap-4 font-mono text-[13px]">
+        <span className="text-paper/50">{project.tags}</span>
+        {project.note && <span className="text-ochre">{project.note}</span>}
       </div>
-    </div>
+    </>
   )
 
-  const rowClass =
-    'group block border-t border-ink/15 px-4 -mx-4 transition-colors duration-200 hover:bg-indigo hover:text-paper'
+  const cardClass = 'glass flex h-full flex-col justify-between rounded-[1.75rem] p-8'
+  const hover = reduce ? {} : { scale: 1.02, y: -3 }
 
   return project.href ? (
-    <a href={project.href} target="_blank" rel="noreferrer" className={rowClass}>
+    <motion.a
+      href={project.href}
+      target="_blank"
+      rel="noreferrer"
+      whileHover={hover}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className={cardClass}
+    >
       {inner}
-    </a>
+    </motion.a>
   ) : (
-    <div className={rowClass}>{inner}</div>
+    <motion.div
+      whileHover={hover}
+      transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+      className={cardClass}
+    >
+      {inner}
+    </motion.div>
   )
 }
 
@@ -66,17 +72,21 @@ export default function Projects() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="scroll-mt-16 pb-24"
+      className="scroll-mt-24 py-14"
     >
       <div className="flex items-baseline justify-between pb-8">
         <h2 className="display text-[clamp(2rem,5vw,3.2rem)]">Selected work</h2>
-        <span className="hidden font-mono text-[13px] text-graphite sm:block">
+        <span className="hidden font-mono text-[13px] text-paper/50 sm:block">
           3 projects · 2025–26
         </span>
       </div>
-      {projects.map((project) => (
-        <Row key={project.title} project={project} />
-      ))}
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+        <div className="md:col-span-2">
+          <Card project={projects[0]} />
+        </div>
+        <Card project={projects[1]} />
+        <Card project={projects[2]} />
+      </div>
     </motion.section>
   )
 }
