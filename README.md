@@ -4,7 +4,7 @@
 
 Personal portfolio of Oumar Tirera, B.Tech CSE (AI/ML) student at Sharda University.
 
-The design sets a liquid-glass material — floating pill nav, lensed buttons, glass panels with lit rims (`backdrop-filter: blur + saturate`) — over a deep indigo evening with warm ochre light. A strip-woven dash motif, drawn from West African indigo cloth, underlines the name and caps the contact panel. Type is Archivo (expanded for display) with IBM Plex Mono for labels.
+The site is a single rounded app window with a fixed sidebar and four hash-routed views — About, Portfolio, Experience, Contact — rendered in a liquid-glass material (`backdrop-filter: blur + saturate`, lit rims) over a deep indigo evening with warm ochre light. A strip-woven dash motif, drawn from West African indigo cloth, signs the sidebar and underlines every section heading. Type is Archivo (expanded for display) with IBM Plex Mono for labels. Project covers are hand-drawn inline SVGs in the site palette.
 
 ## Stack
 
