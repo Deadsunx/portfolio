@@ -71,11 +71,11 @@ export default function About() {
           </div>
         </div>
 
-        <figure className="glass max-w-[320px] self-start rounded-3xl p-2.5">
+        <figure className="glass flex max-w-[320px] flex-col rounded-3xl p-2.5">
           <img
             src={portrait}
             alt="Oumar Tirera"
-            className="aspect-[4/5] w-full rounded-[1.15rem] object-cover object-[50%_18%]"
+            className="aspect-[4/5] w-full rounded-[1.15rem] object-cover object-[50%_18%] lg:aspect-auto lg:min-h-0 lg:flex-1"
           />
           <figcaption className="flex items-center justify-between px-2 pb-1.5 pt-3">
             <div className="woven w-24" aria-hidden="true" />
