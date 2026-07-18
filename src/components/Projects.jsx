@@ -1,97 +1,82 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
 const projects = [
   {
     title: 'Agentic AI Travel Assistant',
     description:
-      'Web-based travel assistant utilizing agentic AI workflows to plan trips, search flights and hotels, and build day-by-day itineraries.',
-    tags: ['Python', 'LangChain', 'CrewAI'],
-    span: 'md:col-span-2 md:row-span-2',
-    accent: 'from-pink-500/20 to-fuchsia-500/5',
+      'Web-based travel assistant built on agentic AI workflows — a deterministic tool pipeline that searches real flights and hotels, then streams a day-by-day itinerary.',
+    tags: 'Python · LangChain · CrewAI',
+    href: 'https://github.com/Deadsunx/Ai-travel-Agent',
+    note: 'Code on GitHub →',
   },
   {
     title: 'SiniTech Dashboard',
     description:
-      'Prototype business dashboard for a school management SaaS platform.',
-    tags: ['React', 'Full-Stack'],
-    span: 'md:col-span-1 md:row-span-1',
-    accent: 'from-cyan-400/20 to-sky-500/5',
+      'Prototype business dashboard for a school management SaaS platform — enrolment, fees, and staff views in one place.',
+    tags: 'React · Full-Stack',
   },
   {
     title: 'Cyber Threat Classification',
     description:
-      'Academic literature review and classification modeling for cyber threats.',
-    tags: ['ML', 'Research'],
-    span: 'md:col-span-1 md:row-span-1',
-    accent: 'from-violet-500/20 to-indigo-500/5',
+      'Academic literature review and classification modelling for cyber threats, comparing feature sets across published detection approaches.',
+    tags: 'ML · Research',
   },
 ]
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12 } },
-}
+function Row({ project }) {
+  const inner = (
+    <div className="grid grid-cols-1 gap-4 py-10 md:grid-cols-[1fr_260px] md:gap-10">
+      <div>
+        <h3 className="display text-[clamp(1.6rem,3.5vw,2.4rem)]">{project.title}</h3>
+        <p className="mt-4 max-w-[560px] leading-relaxed text-ink/75 transition-colors group-hover:text-paper/85">
+          {project.description}
+        </p>
+      </div>
+      <div className="flex flex-row items-start justify-between gap-2 font-mono text-[13px] md:flex-col md:text-right">
+        <span className="text-graphite transition-colors group-hover:text-paper/70 md:self-end">
+          {project.tags}
+        </span>
+        {project.note && (
+          <span className="text-indigo transition-colors group-hover:text-ochre md:self-end">
+            {project.note}
+          </span>
+        )}
+      </div>
+    </div>
+  )
 
-const card = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  const rowClass =
+    'group block border-t border-ink/15 px-4 -mx-4 transition-colors duration-200 hover:bg-indigo hover:text-paper'
+
+  return project.href ? (
+    <a href={project.href} target="_blank" rel="noreferrer" className={rowClass}>
+      {inner}
+    </a>
+  ) : (
+    <div className={rowClass}>{inner}</div>
+  )
 }
 
 export default function Projects() {
+  const reduce = useReducedMotion()
   return (
-    <section id="projects" className="scroll-mt-24">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="mb-10 text-center"
-      >
-        <h2 className="font-display text-3xl font-bold sm:text-4xl">Projects</h2>
-        <p className="mt-3 text-slate-400">
-          A selection of things I&apos;ve been building.
-        </p>
-      </motion.div>
-
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: '-80px' }}
-        className="grid auto-rows-fr grid-cols-1 gap-5 md:grid-cols-3"
-      >
-        {projects.map((project) => (
-          <motion.article
-            key={project.title}
-            variants={card}
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-            className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-7 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl ${project.span}`}
-          >
-            <div
-              className={`pointer-events-none absolute inset-0 bg-gradient-to-br opacity-60 transition-opacity duration-300 group-hover:opacity-100 ${project.accent}`}
-            />
-            <div className="relative">
-              <h3 className="font-display text-xl font-semibold text-white sm:text-2xl">
-                {project.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                {project.description}
-              </p>
-            </div>
-            <div className="relative mt-6 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-slate-200 backdrop-blur-xl"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.article>
-        ))}
-      </motion.div>
-    </section>
+    <motion.section
+      id="projects"
+      initial={reduce ? {} : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className="scroll-mt-16 pb-24"
+    >
+      <div className="flex items-baseline justify-between pb-8">
+        <h2 className="display text-[clamp(2rem,5vw,3.2rem)]">Selected work</h2>
+        <span className="hidden font-mono text-[13px] text-graphite sm:block">
+          3 projects · 2025–26
+        </span>
+      </div>
+      {projects.map((project) => (
+        <Row key={project.title} project={project} />
+      ))}
+    </motion.section>
   )
 }

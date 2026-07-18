@@ -1,54 +1,37 @@
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 
-const skills = [
-  'Python',
-  'Java',
-  'C++',
-  'React',
-  'Node.js',
-  'SQL',
-  'LangChain',
-  'CrewAI',
-  'OOP',
-  'DBMS',
-  'Operating Systems',
+const groups = [
+  { label: 'Languages', items: 'Python · Java · C++' },
+  { label: 'Web', items: 'React · Node.js · SQL' },
+  { label: 'AI & agents', items: 'LangChain · CrewAI' },
+  { label: 'Foundations', items: 'OOP · DBMS · Operating Systems' },
 ]
 
-function Pill({ label }) {
-  return (
-    <span className="inline-flex shrink-0 items-center rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-slate-200 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl">
-      {label}
-    </span>
-  )
-}
-
 export default function TechStack() {
+  const reduce = useReducedMotion()
   return (
     <motion.section
-      initial={{ opacity: 0, y: 24 }}
+      initial={reduce ? {} : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      aria-label="Tech stack"
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      aria-label="Toolbox"
+      className="border-t border-ink/15 py-16"
     >
-      <h2 className="mb-8 text-center font-display text-sm font-semibold uppercase tracking-[0.25em] text-slate-500">
-        Tech Stack
+      <h2 className="font-mono text-[13px] uppercase tracking-[0.2em] text-graphite">
+        Toolbox
       </h2>
-
-      {/* Marquee on md+, wrap on mobile */}
-      <div className="relative hidden overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="animate-marquee flex w-max gap-4 pr-4">
-          {[...skills, ...skills].map((skill, i) => (
-            <Pill key={`${skill}-${i}`} label={skill} />
-          ))}
-        </div>
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-3 md:hidden">
-        {skills.map((skill) => (
-          <Pill key={skill} label={skill} />
+      <dl className="mt-8 max-w-[720px]">
+        {groups.map((group) => (
+          <div
+            key={group.label}
+            className="grid grid-cols-1 gap-1 border-b border-dotted border-indigo/30 py-4 last:border-b-0 sm:grid-cols-[180px_1fr] sm:gap-6"
+          >
+            <dt className="font-mono text-[13px] text-indigo">{group.label}</dt>
+            <dd className="text-[17px] font-medium">{group.items}</dd>
+          </div>
         ))}
-      </div>
+      </dl>
     </motion.section>
   )
 }

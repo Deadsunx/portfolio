@@ -1,51 +1,52 @@
-import { motion } from 'framer-motion'
-
-const glassButton =
-  'rounded-2xl border border-white/10 bg-white/5 px-7 py-3.5 text-sm font-semibold backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-colors duration-300'
+import { motion, useReducedMotion } from 'framer-motion'
 
 export default function Hero() {
+  const reduce = useReducedMotion()
+  const rise = (delay) => ({
+    initial: reduce ? {} : { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.55, delay, ease: 'easeOut' },
+  })
+
   return (
-    <section className="flex min-h-[85vh] flex-col items-center justify-center text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
-        className="flex flex-col items-center gap-6"
+    <section className="pt-24 pb-28 md:pt-36">
+      <motion.p {...rise(0)} className="font-mono text-[13px] text-graphite">
+        B.Tech CSE (AI/ML) · Sharda University · Greater Noida, India
+      </motion.p>
+
+      <motion.h1
+        {...rise(0.08)}
+        className="display mt-6 text-[clamp(3rem,10vw,7.5rem)] uppercase"
       >
-        <span className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wide text-slate-300 backdrop-blur-xl">
-          B.Tech CSE (AI/ML) · Sharda University
-        </span>
+        Oumar
+        <br />
+        Tirera
+      </motion.h1>
 
-        <h1 className="font-display text-4xl font-bold leading-tight sm:text-6xl md:text-7xl">
-          Hi, I&apos;m{' '}
-          <span className="bg-gradient-to-r from-pink-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
-            Oumar Tirera.
-          </span>
-        </h1>
+      <motion.div {...rise(0.16)} className="woven mt-8 max-w-[560px]" aria-hidden="true" />
 
-        <p className="max-w-xl text-base text-slate-400 sm:text-lg">
-          B.Tech CSE (AI/ML) Student crafting intelligent systems and full-stack
-          applications.
-        </p>
+      <motion.p
+        {...rise(0.24)}
+        className="mt-10 max-w-[560px] text-lg leading-relaxed text-ink/80"
+      >
+        I build agentic AI systems and the full-stack applications around them —
+        from LLM tool pipelines to dashboards people actually use. Currently
+        studying computer science with a specialisation in AI/ML.
+      </motion.p>
 
-        <div className="mt-4 flex flex-col gap-4 sm:flex-row">
-          <motion.a
-            href="#projects"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className={`${glassButton} text-white hover:bg-white/10`}
-          >
-            View Projects
-          </motion.a>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.97 }}
-            className={`${glassButton} text-slate-300 hover:bg-white/10 hover:text-white`}
-          >
-            Contact Me
-          </motion.a>
-        </div>
+      <motion.div {...rise(0.32)} className="mt-10 flex gap-8 font-mono text-[14px]">
+        <a
+          href="#projects"
+          className="border-b-2 border-indigo pb-0.5 text-indigo hover:border-ink hover:text-ink"
+        >
+          View projects ↓
+        </a>
+        <a
+          href="#contact"
+          className="border-b-2 border-transparent pb-0.5 text-graphite hover:border-ink hover:text-ink"
+        >
+          Get in touch →
+        </a>
       </motion.div>
     </section>
   )

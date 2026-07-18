@@ -2,22 +2,15 @@
 
 **Live site: [portfolio-two-amber-7tob6jqd7n.vercel.app](https://portfolio-two-amber-7tob6jqd7n.vercel.app)**
 
-Personal portfolio of Oumar Tirera, B.Tech CSE (AI/ML) student at Sharda University — built with a "Candy Glass" aesthetic: a midnight canvas, neon glow orbs, and frosted-glass UI throughout.
+Personal portfolio of Oumar Tirera, B.Tech CSE (AI/ML) student at Sharda University.
+
+The design draws on West African strip-woven cloth: a bone-white page, deep indigo as the single accent, and a woven dash motif that underlines the name and caps the footer. Type is Archivo (expanded for display) with IBM Plex Mono for labels.
 
 ## Stack
 
-- **React 18** + **Vite 6** — fast dev server and builds
-- **Tailwind CSS v4** — all styling via utility classes (`@tailwindcss/vite`)
-- **Framer Motion** — page fade-ins, scroll-triggered reveals, and hover springs
-- **Space Grotesk / Inter** — display and body typography
-
-## Features
-
-- 🍬 Glassmorphic cards, pills, and buttons (`bg-white/5 backdrop-blur-xl`)
-- 🌌 Blurred neon glow orbs floating behind the UI
-- 🎠 Infinite-scrolling tech-stack marquee (pauses on hover, wraps to a grid on mobile)
-- 🍱 Bento-box project grid with staggered reveals and scale-on-hover
-- 📱 Fully responsive, mobile-first layout
+- **React 18** + **Vite 6**
+- **Tailwind CSS v4** (`@tailwindcss/vite`)
+- **Framer Motion** — restrained entrance motion, respects `prefers-reduced-motion`
 
 ## Local development
 
