@@ -44,10 +44,10 @@ export { Heading }
 export default function About() {
   return (
     <div className="flex flex-col gap-12">
-      <Heading>About me</Heading>
-
-      <div className="grid gap-10 lg:grid-cols-[1fr_300px]">
-        <div className="flex max-w-[560px] flex-col gap-5 text-[16px] leading-relaxed text-paper/80">
+      <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
+        <div>
+          <Heading>About me</Heading>
+          <div className="mt-10 flex max-w-[560px] flex-col gap-5 text-[16px] leading-relaxed text-paper/80">
           <p>
             I&apos;m <strong className="font-semibold text-paper">Oumar Tirera</strong>, a
             B.Tech CSE (AI/ML) student at Sharda University, based in Greater
@@ -68,9 +68,10 @@ export default function About() {
             I&apos;m committed to continuous learning — currently deep in LLM tool
             pipelines and evaluation harnesses, and always up for a hackathon.
           </p>
+          </div>
         </div>
 
-        <figure className="glass max-w-[300px] rounded-3xl p-2.5">
+        <figure className="glass max-w-[320px] self-start rounded-3xl p-2.5">
           <img
             src={portrait}
             alt="Oumar Tirera"
