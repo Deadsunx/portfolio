@@ -28,11 +28,7 @@ const SOCIALS = [
     Icon: LinkedInIcon,
   },
   { label: 'Email', href: 'mailto:oumartambatirera@gmail.com', Icon: MailIcon },
-  {
-    label: 'Résumé',
-    href: 'https://drive.google.com/file/d/1IfjgUhibxvkNGU3nq41l4MgX1XfmOdSP/view?usp=sharing',
-    Icon: FileIcon,
-  },
+  { label: 'Résumé', href: '/resume.pdf', Icon: FileIcon },
 ]
 
 function currentSection() {
@@ -83,8 +79,8 @@ function SocialRow() {
         <a
           key={label}
           href={href}
-          target={href.startsWith('http') ? '_blank' : undefined}
-          rel={href.startsWith('http') ? 'noreferrer' : undefined}
+          target={href.startsWith('mailto:') ? undefined : '_blank'}
+          rel={href.startsWith('mailto:') ? undefined : 'noreferrer'}
           aria-label={label}
           className="glass-deep flex h-10 w-10 items-center justify-center rounded-xl text-paper/70 transition-colors hover:text-ochre"
         >
