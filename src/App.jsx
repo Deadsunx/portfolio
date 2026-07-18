@@ -100,8 +100,8 @@ export default function App() {
   const View = SECTIONS.find((s) => s.id === section).view
 
   return (
-    <div className="night-sky grain flex min-h-screen flex-col p-3 font-sans text-paper antialiased md:p-6 lg:p-8">
-      <div className="glass-deep mx-auto flex min-h-0 w-full max-w-[1360px] flex-1 flex-col overflow-hidden rounded-[1.5rem] md:h-[calc(100vh-4rem)] md:flex-row md:rounded-[2rem]">
+    <div className="night-sky grain flex min-h-screen flex-col p-3 font-sans text-paper antialiased md:h-screen md:p-6 lg:p-8">
+      <div className="glass-deep mx-auto flex min-h-0 w-full max-w-[1360px] flex-1 flex-col overflow-hidden rounded-[1.5rem] md:flex-row md:rounded-[2rem]">
         {/* Mobile top bar */}
         <header className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:hidden">
           <div>
