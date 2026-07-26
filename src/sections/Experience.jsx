@@ -19,8 +19,10 @@ const entries = [
     period: '2025 — Present',
     Icon: CodeIcon,
     points: [
+      'Hindsight — a public prediction engine that scores its own calls daily.',
+      'Ephemeris — a self-building dataset archived by scheduled automation.',
+      'Netflix content clustering — unsupervised NLP pipeline over the catalogue.',
       'SiniTech — prototype dashboard for a school-management SaaS.',
-      'Cyber threat classification — literature review and modelling.',
       'This portfolio — React, Tailwind v4, and a liquid-glass design system.',
     ],
   },

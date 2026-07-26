@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-night: #10142d;
+  --color-night: #070910;
   --color-paper: #f2f1ec;
   --color-indigo: #4553b8;
   --color-indigo-deep: #27357f;
@@ -77,9 +77,9 @@ html {
 .night-sky {
   background-color: var(--color-night);
   background-image:
-    radial-gradient(900px circle at 85% -5%, rgba(217, 164, 65, 0.17), transparent 60%),
-    radial-gradient(1100px circle at 8% 18%, rgba(69, 83, 184, 0.32), transparent 65%),
-    radial-gradient(900px circle at 70% 95%, rgba(39, 53, 127, 0.55), transparent 60%);
+    radial-gradient(900px circle at 85% -5%, rgba(217, 164, 65, 0.07), transparent 60%),
+    radial-gradient(1100px circle at 8% 18%, rgba(69, 83, 184, 0.14), transparent 65%),
+    radial-gradient(900px circle at 70% 95%, rgba(39, 53, 127, 0.22), transparent 60%);
 }
 
 /* Fine grain so surfaces read as material, not vector fill */
