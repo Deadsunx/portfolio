@@ -18,6 +18,7 @@ const arsenal = [
   { name: 'Node.js', tone: 'text-paper' },
   { name: 'SQL', tone: 'text-ochre' },
   { name: 'LangChain', tone: 'text-ochre' },
+  { name: 'LangGraph', tone: 'text-paper' },
   { name: 'CrewAI', tone: 'text-indigo-300' },
   { name: 'OOP', tone: 'text-paper' },
   { name: 'DBMS', tone: 'text-ochre' },

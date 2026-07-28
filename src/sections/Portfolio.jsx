@@ -45,25 +45,25 @@ function ThreatCover() {
 
 const projects = [
   {
-    title: 'Agentic AI Travel Assistant',
-    badge: 'PBL Project',
-    description:
-      'Web-based travel assistant built on agentic AI workflows — a deterministic tool pipeline that searches real flights and hotels, then streams a day-by-day itinerary.',
-    tags: ['Python', 'LangChain', 'CrewAI'],
-    repo: 'https://github.com/Deadsunx/Ai-travel-Agent',
-    preview: travelPreview,
-    previewAlt: 'The Travel Desk interface, showing the trip prompt and live source panel',
-  },
-  {
     title: 'Hindsight',
     badge: 'Live',
     description:
-      'A machine that guesses tomorrow in public and keeps score. Six falsifiable calls a day — one hand-written rule, one logistic regression — committed to git before the outcome exists, so the record is tamper-evident.',
+      'A machine that guesses tomorrow in public and keeps score. Six falsifiable calls a day — one hand-written rule, one logistic regression — committed to git before the outcome exists, so the record is tamper-evident. Scored against a coin flip and the base rate, and it says so when it loses.',
     tags: ['Python', 'scikit-learn', 'GitHub Actions'],
-    repo: 'https://github.com/Deadsunx/pas-vraiment-secret',
-    live: 'https://pas-vraiment-secret.vercel.app',
+    repo: 'https://github.com/Deadsunx/hindsight',
+    live: 'https://hindsight-deadsunx.vercel.app',
     preview: hindsightPreview,
     previewAlt: 'The Hindsight register, listing the day’s sealed predictions and their odds',
+  },
+  {
+    title: 'Agentic AI Travel Assistant',
+    badge: 'PBL Project',
+    description:
+      'Travel planner built as a LangGraph state machine — a supervisor turns the budget into hard constraints, specialist desks pick flights, stays and places in parallel, and a critic can send the plan back for revision. Benchmarked against a deterministic pipeline it beats 15/16 to 13/16.',
+    tags: ['Python', 'LangGraph', 'FastAPI'],
+    repo: 'https://github.com/Deadsunx/Ai-travel-Agent',
+    preview: travelPreview,
+    previewAlt: 'The Travel Desk interface, showing the trip prompt and live source panel',
   },
   {
     title: 'Ephemeris',
@@ -71,8 +71,8 @@ const projects = [
     description:
       'A growing dataset that builds itself. A scheduled workflow archives four free sources every day — crypto prices, a quote, NASA’s picture of the day, and a car-news headline — running on GitHub’s servers whether my laptop is on or not.',
     tags: ['Python', 'GitHub Actions', 'APIs'],
-    repo: 'https://github.com/Deadsunx/un-peu-trop-secret',
-    live: 'https://un-peu-trop-secret.vercel.app',
+    repo: 'https://github.com/Deadsunx/daily-ephemeris',
+    live: 'https://daily-ephemeris.vercel.app',
     preview: ephemerisPreview,
     previewAlt: 'The Ephemeris daily record, showing the date, star field, and reading panels',
   },
