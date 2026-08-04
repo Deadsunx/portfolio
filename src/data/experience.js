@@ -1,12 +1,9 @@
-/*
- * ⚠ Dates below were assumed in an earlier session and have never been
- * confirmed by Oumar. Verify before this ships publicly.
- */
+/* Dates confirmed by Oumar, 2026-08-04. */
 export const experience = [
   {
     org: 'Sharda University',
     role: 'B.Tech CSE — Artificial Intelligence & Machine Learning',
-    period: '2024 — Present',
+    period: '2024 — 2028',
     icon: 'grad',
     points: [
       'Specialisation in Artificial Intelligence & Machine Learning.',
@@ -15,7 +12,7 @@ export const experience = [
     ],
   },
   {
-    org: 'Independent projects',
+    org: 'Personal projects',
     role: 'Designing, building, and shipping my own systems',
     period: '2025 — Present',
     icon: 'code',
