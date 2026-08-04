@@ -1,128 +1,100 @@
-import { CodeIcon } from '../icons.jsx'
-import portrait from '../assets/portrait.jpeg'
-
-function Heading({ children }) {
-  return (
-    <div>
-      <h1 className="display text-4xl md:text-5xl">{children}</h1>
-      <div className="woven mt-5 w-40" aria-hidden="true" />
-    </div>
-  )
-}
-
-const arsenal = [
-  { name: 'Python', tone: 'text-ochre' },
-  { name: 'Java', tone: 'text-paper' },
-  { name: 'C++', tone: 'text-indigo-300' },
-  { name: 'React', tone: 'text-indigo-300' },
-  { name: 'Node.js', tone: 'text-paper' },
-  { name: 'SQL', tone: 'text-ochre' },
-  { name: 'LangChain', tone: 'text-ochre' },
-  { name: 'LangGraph', tone: 'text-indigo-300' },
-  { name: 'OOP', tone: 'text-paper' },
-  { name: 'DBMS', tone: 'text-ochre' },
-  { name: 'Operating Systems', tone: 'text-indigo-300' },
-]
+import Depth from '../components/Depth.jsx'
+import SectionHead from '../components/SectionHead.jsx'
+import { Reveal, Stagger, staggerItem } from '../components/Reveal.jsx'
+import { motion } from 'framer-motion'
+import portrait from '../assets/portrait-face.jpg'
 
 const expectations = [
-  {
-    title: 'Agentic by default',
-    body: 'I design tool pipelines, not just prompts.',
-  },
-  {
-    title: 'Deterministic where it matters',
-    body: 'Tested, evaluated, reproducible.',
-  },
-  {
-    title: 'Clear communication',
-    body: 'Deep tech or plain English — whichever you prefer.',
-  },
+  { title: 'Agentic by default', body: 'I design tool pipelines, not just prompts.' },
+  { title: 'Deterministic where it matters', body: 'Reproducible, evaluated, checkable.' },
+  { title: 'Plain about tradeoffs', body: 'I can tell you what I gave up and why.' },
 ]
-
-export { Heading }
 
 export default function About() {
   return (
-    <div className="flex flex-col gap-12">
-      <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-        <div>
-          <Heading>About me</Heading>
-          <div className="mt-10 flex max-w-[560px] flex-col gap-5 text-[16px] leading-relaxed text-paper/80">
-          <p>
-            I&apos;m <strong className="font-semibold text-paper">Oumar Tirera</strong>, a
-            B.Tech CSE (AI/ML) student at Sharda University, based in Greater
-            Noida, India.
-          </p>
-          <p>
-            I specialise in building{' '}
-            <span className="font-mono text-[15px] text-ochre">agentic</span> and{' '}
-            <span className="font-mono text-[15px] text-ochre">reliable</span>{' '}
-            <span className="font-mono text-[15px] text-indigo-300">AI systems.</span>
-          </p>
-          <p>
-            From travel-planning agents to school-management dashboards, my
-            philosophy stays the same: make it deterministic where it matters,
-            and delightful where people touch it.
-          </p>
-          <p>
-            I&apos;m committed to continuous learning — currently deep in LLM tool
-            pipelines and evaluation harnesses, and always up for a hackathon.
-          </p>
-          </div>
+    <section id="about" className="relative px-6 py-28 sm:px-10 sm:py-36">
+      <Depth level={1} className="layer">
+        <div className="absolute right-[8%] top-[18%] h-[26vw] w-[26vw] rounded-full bg-indigo-deep/25 blur-[110px]" />
+      </Depth>
+
+      <div className="relative mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[230px_1fr] lg:gap-20">
+        {/* Sticky identity — present the whole time you're read about,
+            at a fraction of the screen cost of a portrait card. */}
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Reveal>
+            <div className="flex items-center gap-4 lg:flex-col lg:items-start">
+              <div className="glass shrink-0 rounded-full p-1.5">
+                <img
+                  src={portrait}
+                  alt="Oumar Tirera"
+                  width="88"
+                  height="88"
+                  loading="lazy"
+                  className="h-[76px] w-[76px] rounded-full object-cover object-center sm:h-[88px] sm:w-[88px]"
+                />
+              </div>
+              <div className="lg:mt-5">
+                <div className="display text-[17px]">Oumar Tirera</div>
+                <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
+                  AI/ML Engineer
+                </div>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="woven mt-6 hidden w-24 lg:block" aria-hidden="true" />
+          </Reveal>
         </div>
 
-        <figure className="glass flex max-w-[320px] flex-col rounded-3xl p-2.5">
-          <img
-            src={portrait}
-            alt="Oumar Tirera"
-            className="aspect-[4/5] w-full rounded-[1.15rem] object-cover object-[50%_18%] lg:aspect-auto lg:min-h-0 lg:flex-1"
-          />
-          <figcaption className="flex items-center justify-between px-2 pb-1.5 pt-3">
-            <div className="woven w-24" aria-hidden="true" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/50">
-              Greater Noida
-            </span>
-          </figcaption>
-        </figure>
-      </div>
+        <div>
+          <SectionHead kicker="01 / About" title="The short version." />
 
-      <div className="grid gap-6 xl:grid-cols-2">
-        <section className="glass rounded-3xl p-7" aria-label="Technical arsenal">
-          <div className="flex items-center gap-4">
-            <span className="glass-deep flex h-11 w-11 items-center justify-center rounded-xl text-ochre">
-              <CodeIcon className="h-5 w-5" />
-            </span>
-            <h2 className="display text-xl">Technical arsenal</h2>
+          <div className="mt-10 flex max-w-[58ch] flex-col gap-6 text-[17px] leading-relaxed text-paper/75">
+            <Reveal delay={0.05}>
+              <p>
+                I&apos;m a B.Tech Computer Science student at Sharda University, specialising in
+                Artificial Intelligence and Machine Learning.
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p>
+                Most of what I build sits at the same seam: a model or a pipeline that has to
+                produce something a person will actually rely on. That constraint is what
+                interests me. It is the difference between a notebook that reports a good
+                number and a system that behaves the same way on a Tuesday when nobody is
+                watching.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p>
+                So I tend to work across the whole thing — the data, the model, the pipeline
+                around it, and the interface someone touches. Not because I want to be a
+                generalist, but because in every project so far the interesting failures have
+                been at the joins.
+              </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <p>
+                Right now I&apos;m deep in LLM tool pipelines and evaluation — how you get a
+                probabilistic component to behave predictably enough to build on.
+              </p>
+            </Reveal>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            {arsenal.map((tech) => (
-              <span
-                key={tech.name}
-                className={`glass-deep rounded-full px-4 py-1.5 font-mono text-[13px] ${tech.tone}`}
-              >
-                {tech.name}
-              </span>
-            ))}
-          </div>
-        </section>
 
-        <section className="glass rounded-3xl p-7" aria-label="What to expect">
-          <div className="flex items-center gap-4">
-            <span className="glass-deep flex h-11 w-11 items-center justify-center rounded-xl text-ochre">
-              <span className="display text-lg">✳</span>
-            </span>
-            <h2 className="display text-xl">What to expect</h2>
-          </div>
-          <div className="mt-6 flex flex-col gap-3">
+          <Stagger className="mt-12 grid gap-3 sm:grid-cols-3" gap={0.1}>
             {expectations.map((item) => (
-              <div key={item.title} className="glass-deep rounded-2xl px-5 py-4">
-                <div className="font-semibold">{item.title}</div>
-                <div className="mt-0.5 text-[14px] text-paper/60">{item.body}</div>
-              </div>
+              <motion.div
+                key={item.title}
+                variants={staggerItem}
+                className="glass-flat rounded-2xl px-5 py-5"
+              >
+                <div className="text-[15px] font-semibold leading-snug">{item.title}</div>
+                <div className="mt-2 text-[13.5px] leading-relaxed text-paper/55">{item.body}</div>
+              </motion.div>
             ))}
-          </div>
-        </section>
+          </Stagger>
+        </div>
       </div>
-    </div>
+    </section>
   )
 }
