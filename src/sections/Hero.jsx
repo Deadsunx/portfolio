@@ -55,7 +55,7 @@ export default function Hero() {
             </span>
           </span>
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/55">
-            Greater Noida, India
+            Remote &amp; on-site
           </span>
         </motion.div>
 

@@ -2,7 +2,6 @@ import Depth from '../components/Depth.jsx'
 import SectionHead from '../components/SectionHead.jsx'
 import { Reveal, Stagger, staggerItem } from '../components/Reveal.jsx'
 import { motion } from 'framer-motion'
-import { PinIcon } from '../icons.jsx'
 import portrait from '../assets/portrait-face.jpg'
 
 const expectations = [
@@ -36,9 +35,8 @@ export default function About() {
               </div>
               <div className="lg:mt-5">
                 <div className="display text-[17px]">Oumar Tirera</div>
-                <div className="mt-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
-                  <PinIcon className="h-3.5 w-3.5" />
-                  Greater Noida
+                <div className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
+                  AI/ML Engineer
                 </div>
               </div>
             </div>
@@ -55,7 +53,7 @@ export default function About() {
             <Reveal delay={0.05}>
               <p>
                 I&apos;m a B.Tech Computer Science student at Sharda University, specialising in
-                Artificial Intelligence and Machine Learning, based in Greater Noida, India.
+                Artificial Intelligence and Machine Learning.
               </p>
             </Reveal>
             <Reveal delay={0.1}>

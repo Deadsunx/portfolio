@@ -43,9 +43,9 @@ export default function Contact() {
                   src={portrait}
                   alt="Oumar Tirera"
                   loading="lazy"
-                  className="h-[168px] w-[168px] rounded-[1.25rem] object-cover object-center sm:h-[200px] sm:w-[200px]"
+                  className="h-[112px] w-[112px] rounded-[1.1rem] object-cover object-center sm:h-[132px] sm:w-[132px]"
                 />
-                <div className="woven mt-4 w-20" aria-hidden="true" />
+                <div className="woven mt-3.5 w-16" aria-hidden="true" />
               </div>
 
               <div className="min-w-0 flex-1">

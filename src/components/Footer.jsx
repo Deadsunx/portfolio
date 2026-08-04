@@ -43,7 +43,7 @@ export default function Footer() {
             Oumar Tirera
           </Link>
           <p className="mt-1.5 font-mono text-[12px] text-paper/55">
-            Built with React, Tailwind, and a hand-written canvas. Greater Noida, India.
+            Built with React, Tailwind, and a hand-written canvas.
           </p>
         </div>
         <SocialRow />
