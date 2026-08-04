@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import SectionHead from '../components/SectionHead.jsx'
 import Depth from '../components/Depth.jsx'
-import { ClipReveal, Reveal } from '../components/Reveal.jsx'
-import { SocialRow } from '../components/Footer.jsx'
+import { ClipReveal } from '../components/Reveal.jsx'
 import { CopyIcon, ArrowRightIcon } from '../icons.jsx'
 import portrait from '../assets/portrait-face.jpg'
 
@@ -85,13 +84,6 @@ export default function Contact() {
             </div>
           </div>
         </ClipReveal>
-
-        <Reveal delay={0.15} className="mt-10 flex flex-wrap items-center justify-between gap-6">
-          <div className="font-mono text-[12px] text-paper/55">
-            Or find me in the usual places →
-          </div>
-          <SocialRow />
-        </Reveal>
       </div>
     </section>
   )
