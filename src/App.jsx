@@ -1,167 +1,85 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import About from './sections/About.jsx'
-import Portfolio from './sections/Portfolio.jsx'
-import Experience from './sections/Experience.jsx'
-import Contact from './sections/Contact.jsx'
-import {
-  GitHubIcon,
-  LinkedInIcon,
-  MailIcon,
-  FileIcon,
-  MenuIcon,
-  CloseIcon,
-} from './icons.jsx'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import PointField from './components/PointField.jsx'
+import Nav from './components/Nav.jsx'
+import Footer from './components/Footer.jsx'
+import Home from './pages/Home.jsx'
+import Project from './pages/Project.jsx'
+import NotFound from './pages/NotFound.jsx'
+import { useMotionBudget } from './lib/env.js'
 
-const SECTIONS = [
-  { id: 'about', label: 'About me', view: About },
-  { id: 'portfolio', label: 'Portfolio', view: Portfolio },
-  { id: 'experience', label: 'Experience', view: Experience },
-  { id: 'contact', label: 'Contact me', view: Contact },
-]
+/*
+ * Route changes start at the top. A URL that arrives with a hash has to be
+ * scrolled by hand — on a first load the target section does not exist yet
+ * when the browser would normally jump to it.
+ */
+function ScrollToTop() {
+  const { pathname, hash } = useLocation()
 
-const SOCIALS = [
-  { label: 'GitHub', href: 'https://github.com/Deadsunx', Icon: GitHubIcon },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/oumar-tirera-5a7a7b16b',
-    Icon: LinkedInIcon,
-  },
-  { label: 'Email', href: 'mailto:oumartambatirera@gmail.com', Icon: MailIcon },
-  { label: 'Résumé', href: '/resume.pdf', Icon: FileIcon },
-]
+  useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1)
+      let attempts = 0
+      const settle = () => {
+        const el = document.getElementById(id)
+        if (el) {
+          /* 'instant', not 'auto' — 'auto' defers to CSS scroll-behavior,
+             which is smooth, and a deep link would animate the whole page. */
+          el.scrollIntoView({ behavior: 'instant', block: 'start' })
+        } else if (attempts < 10) {
+          attempts += 1
+          requestAnimationFrame(settle)
+        }
+      }
+      requestAnimationFrame(settle)
+      return
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [pathname, hash])
 
-function currentSection() {
-  const hash = window.location.hash.replace('#', '')
-  return SECTIONS.some((s) => s.id === hash) ? hash : 'about'
-}
-
-function Identity() {
-  return (
-    <div>
-      <div className="display text-xl leading-tight">Oumar Tirera</div>
-      <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-ochre">
-        AI/ML · Full-Stack
-      </div>
-      <div className="woven mt-4 w-28" aria-hidden="true" />
-    </div>
-  )
-}
-
-function NavList({ section }) {
-  return (
-    <nav className="flex flex-col gap-2" aria-label="Sections">
-      {SECTIONS.map((item) => {
-        const active = item.id === section
-        return (
-          <a
-            key={item.id}
-            href={`#${item.id}`}
-            aria-current={active ? 'page' : undefined}
-            className={
-              active
-                ? 'glass rounded-xl px-4 py-2.5 font-mono text-[14px] text-ochre'
-                : 'rounded-xl px-4 py-2.5 font-mono text-[14px] text-paper/60 transition-colors hover:bg-white/5 hover:text-paper'
-            }
-          >
-            {item.label}
-          </a>
-        )
-      })}
-    </nav>
-  )
-}
-
-function SocialRow() {
-  return (
-    <div className="flex gap-3">
-      {SOCIALS.map(({ label, href, Icon }) => (
-        <a
-          key={label}
-          href={href}
-          target={href.startsWith('mailto:') ? undefined : '_blank'}
-          rel={href.startsWith('mailto:') ? undefined : 'noreferrer'}
-          aria-label={label}
-          className="glass-deep flex h-10 w-10 items-center justify-center rounded-xl text-paper/70 transition-colors hover:text-ochre"
-        >
-          <Icon className="h-4.5 w-4.5" />
-        </a>
-      ))}
-    </div>
-  )
+  return null
 }
 
 export default function App() {
-  const [section, setSection] = useState(currentSection)
-  const [menuOpen, setMenuOpen] = useState(false)
-  const reduce = useReducedMotion()
-
-  useEffect(() => {
-    const onHash = () => {
-      setSection(currentSection())
-      setMenuOpen(false)
-    }
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
-
-  const View = SECTIONS.find((s) => s.id === section).view
+  const location = useLocation()
+  const { reduced } = useMotionBudget()
 
   return (
-    <div className="night-sky grain flex min-h-screen flex-col p-3 font-sans text-paper antialiased md:h-screen md:p-6 lg:p-8">
-      <div className="glass-deep mx-auto flex min-h-0 w-full max-w-[1360px] flex-1 flex-col overflow-hidden rounded-[1.5rem] md:flex-row md:rounded-[2rem]">
-        {/* Mobile top bar */}
-        <header className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:hidden">
-          <div>
-            <div className="display text-lg leading-tight">Oumar Tirera</div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ochre">
-              AI/ML · Full-Stack
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={() => setMenuOpen((open) => !open)}
-            aria-expanded={menuOpen}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            className="glass flex h-10 w-10 items-center justify-center rounded-xl"
-          >
-            {menuOpen ? <CloseIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
-          </button>
-        </header>
+    <div className="night-sky grain vignette relative min-h-screen font-sans text-paper antialiased">
+      {/* depth 3 — the embedding field, fixed behind the whole document */}
+      <PointField />
 
-        {menuOpen && (
-          <div className="border-b border-white/10 px-5 py-4 md:hidden">
-            <NavList section={section} />
-            <div className="mt-4">
-              <SocialRow />
-            </div>
-          </div>
-        )}
+      <a
+        href="#main"
+        className="sr-only rounded-lg bg-ochre px-4 py-2 font-mono text-[13px] text-night focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70]"
+      >
+        Skip to content
+      </a>
 
-        {/* Sidebar */}
-        <aside className="hidden w-[260px] shrink-0 flex-col justify-between border-r border-white/10 p-7 md:flex">
-          <div className="flex flex-col gap-10">
-            <Identity />
-            <NavList section={section} />
-          </div>
-          <SocialRow />
-        </aside>
+      <ScrollToTop />
+      <Nav />
 
-        {/* Content */}
-        <main className="scroll-area min-h-0 flex-1 overflow-y-auto">
-          <AnimatePresence mode="wait">
+      {/* depth 4 — everything readable sits above the field */}
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <main id="main" className="flex-1">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
-              key={section}
-              initial={reduce ? {} : { opacity: 0, y: 14 }}
+              key={location.pathname}
+              initial={reduced ? false : { opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? {} : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="px-6 py-10 md:px-12 md:py-14"
+              exit={reduced ? {} : { opacity: 0, y: -8 }}
+              transition={{ duration: reduced ? 0 : 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              <View />
+              <Routes location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/work/:slug" element={<Project />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
             </motion.div>
           </AnimatePresence>
         </main>
+        <Footer />
       </div>
     </div>
   )

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#070910"/>
+  <!-- the woven strip motif, three rhythms -->
+  <g stroke-linecap="round" stroke-width="5">
+    <path d="M12 22h10M28 22h10M44 22h8" stroke="#4553b8"/>
+    <path d="M14 32h7M27 32h9M42 32h8" stroke="#d9a441"/>
+    <path d="M12 42h6M24 42h11M41 42h11" stroke="#f2f1ec"/>
+  </g>
+</svg>
