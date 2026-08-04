@@ -34,7 +34,7 @@ function Card({ project, index, fluid = false }) {
       </div>
 
       <div className="flex flex-1 flex-col p-7">
-        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/35">
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-paper/55">
           <span>{String(index + 1).padStart(2, '0')}</span>
           <span className="h-px flex-1 bg-white/12" aria-hidden="true" />
           {project.timeline && <span>{project.timeline}</span>}
@@ -139,14 +139,14 @@ function Rail() {
         {/* Horizontal progress — without it there is no signal that the
             page is advancing sideways while the scroll goes down. */}
         <div className="mt-12 flex items-center gap-6 px-6 sm:px-10">
-          <span className="label shrink-0 text-paper/35">Keep scrolling</span>
+          <span className="label shrink-0 text-paper/55">Keep scrolling</span>
           <div className="h-px flex-1 bg-white/12" aria-hidden="true">
             <motion.div
               className="h-full origin-left bg-ochre"
               style={{ scaleX: scrollYProgress }}
             />
           </div>
-          <span className="label shrink-0 text-paper/35">{projects.length} projects</span>
+          <span className="label shrink-0 text-paper/55">{projects.length} projects</span>
         </div>
       </div>
     </div>
@@ -190,7 +190,7 @@ export default function Work() {
           <div className="hairline" aria-hidden="true" />
         </Reveal>
         <Reveal delay={0.06}>
-          <h3 className="mt-10 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/40">
+          <h3 className="mt-10 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
             Also built
           </h3>
         </Reveal>
@@ -200,7 +200,7 @@ export default function Work() {
               <div className="flex flex-col gap-2 border-t border-white/8 py-5 sm:flex-row sm:items-baseline sm:gap-8">
                 <div className="display-tight w-[220px] shrink-0 text-[16px]">{item.title}</div>
                 <p className="flex-1 text-[14.5px] leading-relaxed text-paper/55">{item.note}</p>
-                <div className="flex shrink-0 gap-2 font-mono text-[12px] text-paper/35">
+                <div className="flex shrink-0 gap-2 font-mono text-[12px] text-paper/55">
                   {item.tags.join(' · ')}
                 </div>
               </div>

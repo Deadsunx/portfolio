@@ -54,7 +54,7 @@ export default function Hero() {
               Open to internships &amp; freelance
             </span>
           </span>
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/40">
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-paper/55">
             Greater Noida, India
           </span>
         </motion.div>
@@ -96,7 +96,7 @@ export default function Hero() {
         <motion.div {...rise(1.05)} className="mt-16 flex items-center gap-5">
           <div className="woven w-32" aria-hidden="true" />
           <motion.span
-            className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/35"
+            className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55"
             animate={reduced ? undefined : { y: [0, 5, 0] }}
             transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           >

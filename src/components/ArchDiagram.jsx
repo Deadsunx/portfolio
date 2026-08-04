@@ -119,7 +119,7 @@ export default function ArchDiagram({ kind }) {
                   x={x + NODE_W / 2}
                   y={y + 58}
                   textAnchor="middle"
-                  fill="rgba(242,241,236,0.45)"
+                  fill="rgba(242,241,236,0.62)"
                   fontSize="11"
                   fontFamily="IBM Plex Mono, monospace"
                 >
@@ -167,7 +167,7 @@ export default function ArchDiagram({ kind }) {
           </defs>
         </motion.svg>
       </div>
-      <figcaption className="mt-2 font-mono text-[12px] leading-relaxed text-paper/40">
+      <figcaption className="mt-2 font-mono text-[12px] leading-relaxed text-paper/55">
         {caption}
       </figcaption>
     </figure>

@@ -79,13 +79,13 @@ function Header({ project }) {
             </span>
             {project.timeline && (
               <>
-                <span className="text-paper/40">{project.timeline}</span>
+                <span className="text-paper/55">{project.timeline}</span>
                 <span className="text-paper/20" aria-hidden="true">
                   ·
                 </span>
               </>
             )}
-            <span className="text-paper/40">{project.role}</span>
+            <span className="text-paper/55">{project.role}</span>
           </div>
         </Reveal>
 
@@ -181,13 +181,13 @@ export default function Project() {
                   className="glass-flat rounded-2xl p-6 sm:p-7"
                 >
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/35">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
                       Chose
                     </span>
                     <span className="display-tight text-[17px]">{decision.choice}</span>
                   </div>
                   <div className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/35">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
                       Over
                     </span>
                     <span className="text-[15px] text-paper/55">{decision.instead}</span>
@@ -256,7 +256,7 @@ export default function Project() {
               }`}
             />
             <div className="min-w-0 flex-1">
-              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/40">
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
                 Next project
               </div>
               <div className="display t-card mt-2.5">{next.title}</div>

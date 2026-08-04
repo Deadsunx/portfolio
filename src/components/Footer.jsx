@@ -42,7 +42,7 @@ export default function Footer() {
           <Link to="/" className="display text-[15px]">
             Oumar Tirera
           </Link>
-          <p className="mt-1.5 font-mono text-[12px] text-paper/45">
+          <p className="mt-1.5 font-mono text-[12px] text-paper/55">
             Built with React, Tailwind, and a hand-written canvas. Greater Noida, India.
           </p>
         </div>

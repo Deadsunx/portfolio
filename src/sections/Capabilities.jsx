@@ -45,7 +45,7 @@ function StackCard({ item, index, total }) {
               <Icon className="h-6 w-6" />
             </span>
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/35">
+              <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
                 {item.kicker}
               </div>
               <h3 className="display t-card mt-1.5">{item.title}</h3>

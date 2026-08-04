@@ -36,7 +36,7 @@ export default function About() {
               </div>
               <div className="lg:mt-5">
                 <div className="display text-[17px]">Oumar Tirera</div>
-                <div className="mt-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/45">
+                <div className="mt-1.5 flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-paper/55">
                   <PinIcon className="h-3.5 w-3.5" />
                   Greater Noida
                 </div>

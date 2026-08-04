@@ -50,7 +50,7 @@ export default function Contact() {
               </div>
 
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/40">
+                <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-paper/55">
                   Reach me directly
                 </div>
                 <a
@@ -87,7 +87,7 @@ export default function Contact() {
         </ClipReveal>
 
         <Reveal delay={0.15} className="mt-10 flex flex-wrap items-center justify-between gap-6">
-          <div className="font-mono text-[12px] text-paper/40">
+          <div className="font-mono text-[12px] text-paper/55">
             Or find me in the usual places →
           </div>
           <SocialRow />
