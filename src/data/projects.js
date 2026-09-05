@@ -2,16 +2,95 @@ import travelPreview from '../assets/previews/travel.jpg'
 import hindsightPreview from '../assets/previews/hindsight.jpg'
 import ephemerisPreview from '../assets/previews/ephemeris.jpg'
 import netflixPreview from '../assets/previews/netflix.jpg'
+import koraPreview from '../assets/previews/kora.jpg'
+import strandPreview from '../assets/previews/strand.jpg'
 
 /*
  * Single source of truth: the work rail on the home page and every
  * /work/:slug case study both read from here.
  *
  * Rule for this file: nothing gets written here that isn't true. No
- * invented metrics, no invented clients, no invented team sizes.
+ * invented metrics, no invented clients, no invented team sizes. Every
+ * number below appears in the project's own repository or report.
  */
 
 export const projects = [
+  {
+    slug: 'kora',
+    title: 'Kora',
+    status: 'Research',
+    timeline: '2026',
+    role: 'Solo — corpus, retrieval, evaluation, serving',
+    tagline: 'A retrieval system for African business law — and the ablation study that refused to ship its own fine-tune.',
+    summary:
+      'Retrieval-augmented QA over the OHADA business law of 17 francophone African states. The deliverable is not a chatbot but an ablation table: which components actually earn their cost, in accuracy and in latency. Five of its six findings are negative.',
+    preview: koraPreview,
+    previewAlt: 'The Kora technical report, showing headline retrieval and citation metrics',
+    links: {
+      repo: 'https://github.com/Deadsunx/kora',
+      live: 'https://deadsunx.github.io/kora/',
+    },
+    tags: ['Python', 'RAG', 'Evaluation'],
+    accent: 'ochre',
+
+    problem:
+      'Almost every retrieval technique in use was built and evaluated in English, and the assumption is that it transfers. Legal French is a good place to check, because it breaks the assumption in specific ways: dense retrievers trained on English web text blur exactly the tokens that matter — article numbers, fixed terms of art, cross-references between texts. And a legal assistant that cannot cite its source, or will not say "I don\'t know", is worse than useless.',
+
+    build: [
+      {
+        heading: 'The harness came first',
+        body: 'The evaluation harness was built before any retrieval improvement — deliberately, and in that order. An improvement you cannot measure is a preference, not a result. What exists now is 3,056 articles parsed from source PDFs across 10 acts, 64 human-validated questions, 23 recorded runs and 252 tests, on a single 8 GiB laptop GPU.',
+      },
+      {
+        heading: 'Every arrow is a switch',
+        body: 'Parse → structure-aware chunking → hybrid retrieval → cross-encoder reranking → generation with citations and abstention. Each stage is a flag in a config file, so each stage can be turned off and measured against the others rather than argued about.',
+      },
+      {
+        heading: 'Cite, or decline',
+        body: 'Citation accuracy and abstention are first-class metrics, not afterthoughts. Across the gold set the base model fabricated no citations, presented no repealed article as current law, and left no answer uncited — and correctly declined 7 of the 8 questions the corpus cannot answer.',
+      },
+    ],
+
+    diagram: 'rag',
+
+    decisions: [
+      {
+        choice: 'Not shipping the QLoRA fine-tune',
+        instead: 'shipping it, because every training metric said to',
+        because:
+          'The adapter hit 98.4% token accuracy at 0.027 loss. Abstention went to 8/8, latency fell 41%, answers got shorter. Citation recall fell 11.9 points and the answers stopped answering the question — it had learned to echo each article\'s opening sentence, because that is literally what the training targets were built from. Similarity to the cited article\'s opening went from 0.222 to 0.896. Every structural metric improved while quality collapsed, and a dashboard would have called it a successful fine-tune.',
+      },
+      {
+        choice: 'Reading the model\'s actual replies',
+        instead: 'trusting the evaluation numbers',
+        because:
+          'The agentic layer looked like a no-op: identical recall, 2.7× the latency. Reading the outputs explained it — the decomposer called 47 of 59 questions atomic, including 8 of the 9 multi-hop questions it exists to split. The verifier is its mirror image: it asked for more context on 55 of 59, improved none, and damaged one. The same habit caught table-of-contents contamination in the parser that both automated self-checks had passed.',
+      },
+      {
+        choice: 'Reranking, and nothing else',
+        instead: 'keeping the hybrid BM25 fusion and the wider candidate pool',
+        because:
+          'Reranking was the only component that earned its cost: +8.0 points of recall@5 for 205 ms. BM25 fusion was hypothesised in a config file before measurement, then refuted — its entire effect turned out to live in cross-act questions and nowhere else. A wider pool of 50 candidates was worse than 20 at the k that matters, because distractors got more chances to score into the top five than true positives had to be rescued.',
+      },
+    ],
+
+    outcomes: [
+      'recall@5 of 0.815 at 205 ms median — +8.0 points, +11% relative, over the frozen dense baseline.',
+      'Zero fabricated citations and zero repealed articles cited as law across the gold set; 7 of 8 unanswerable questions correctly declined.',
+      'Six findings, five of them negative — the fine-tune, both agent layers and BM25 fusion were each measured and left unshipped.',
+      'The whole project written up as a public technical report, with every number linked to the run that produced it.',
+    ],
+
+    stack: [
+      { name: 'multilingual-e5-base', why: 'Dense retrieval that survives legal French.' },
+      { name: 'bge-reranker-v2-m3', why: 'Cross-encoder — the one component that earned its latency.' },
+      { name: 'Qwen3-4B, 4-bit NF4', why: 'Generation inside 8 GiB of laptop VRAM.' },
+      { name: 'QLoRA', why: 'The fine-tune that was measured, and then rejected.' },
+      { name: 'FastAPI + SSE', why: 'Streaming service; generation serialised behind a lock.' },
+      { name: 'Config-driven ablations', why: 'Every stage is a switch, so every stage is measurable.' },
+    ],
+  },
+
   {
     slug: 'hindsight',
     title: 'Hindsight',
@@ -20,7 +99,7 @@ export const projects = [
     role: 'Solo',
     tagline: 'A machine that guesses tomorrow in public, and keeps score.',
     summary:
-      'Six falsifiable predictions a day — one hand-written rule, one logistic regression — committed before the outcome exists, so the record cannot be edited after the fact. Scored against a coin flip and the base rate, and it says so when it loses.',
+      'Daily falsifiable forecasts from a walk-forward logistic regression, kept leak-proof by test and committed before the outcome exists. Scored against a coin flip and the base rate, and it says so when it loses.',
     preview: hindsightPreview,
     previewAlt: 'The Hindsight register, listing the day’s sealed predictions and their odds',
     links: {
@@ -36,15 +115,15 @@ export const projects = [
     build: [
       {
         heading: 'Predictions are sealed, not saved',
-        body: 'Six calls are generated each day and committed to git before the outcome exists. The commit timestamp is the seal — a prediction cannot be revised after the fact without the revision being part of the public record.',
+        body: 'Calls are committed to git before the outcome exists. The commit timestamp is the seal — a prediction cannot be revised after the fact without the revision being part of the public record.',
       },
       {
-        heading: 'Two predictors, side by side',
-        body: 'One hand-written rule and one logistic regression make the same calls on the same days. The rule is the baseline that the model has to beat, which is the comparison most published accuracy numbers leave out.',
+        heading: 'Walk-forward, and leak-proof by test',
+        body: 'The model only ever trains on data that existed before the day it is predicting, and that property is enforced by a test rather than by care. Lookahead leakage is the failure mode that makes a forecasting model look brilliant and be worthless, so it is checked automatically rather than assumed.',
       },
       {
-        heading: 'Scoring is automatic',
-        body: 'A scheduled workflow resolves yesterday\'s calls against reality and updates the running record. No step in the loop requires me to be at a computer, which is also what stops me from tidying the results.',
+        heading: 'Scored against things that are hard to beat',
+        body: 'A coin flip and the base rate run alongside the model permanently. A forecaster that cannot beat the base rate has not earned attention, and the site reports that comparison whether or not it flatters the model.',
       },
     ],
 
@@ -61,19 +140,19 @@ export const projects = [
         choice: 'Logistic regression',
         instead: 'a gradient-boosted or neural model',
         because:
-          'The point of the project is an auditable track record. A model I can read the coefficients of tells me why a call was made, and on this amount of data a heavier model would mostly have given me more variance to explain.',
+          'The point of the project is an auditable track record. A model whose coefficients I can read tells me why a call was made, and on this amount of data a heavier model would mostly have given me more variance to explain.',
       },
       {
-        choice: 'A hand-written rule running alongside',
-        instead: 'reporting the model alone',
+        choice: 'Enforcing the walk-forward split in a test',
+        instead: 'being careful about it',
         because:
-          'A model that cannot beat five lines of if-statements has not earned its place. Running both publicly means that comparison is permanent rather than something I check once and forget.',
+          'Lookahead leakage does not announce itself — it shows up as suspiciously good accuracy that quietly evaporates in production. Being careful is not a control. A test that fails when the training window crosses the prediction date is.',
       },
     ],
 
     outcomes: [
       'A public, timestamped record of every call made — including the wrong ones.',
-      'Model and baseline scored against each other continuously, not once at training time.',
+      'Model, coin flip and base rate scored against each other continuously, not once at training time.',
       'Runs entirely on scheduled automation; no manual step can touch the record.',
     ],
 
@@ -89,15 +168,18 @@ export const projects = [
   {
     slug: 'travel-assistant',
     title: 'Agentic AI Travel Assistant',
-    status: 'Capstone',
+    status: 'Live',
     timeline: '2026',
     role: 'Solo — architecture, backend, frontend',
     tagline: 'Two planners, and the measurement that decides between them.',
     summary:
       'Travel planner built as a LangGraph state machine — a supervisor turns the budget into hard constraints, specialist desks pick flights, stays and places in parallel, and a critic can send the plan back. The deterministic pipeline it replaced is still in the repo as the control it is measured against.',
     preview: travelPreview,
-    previewAlt: 'The Travel Desk interface, showing the trip prompt and the live source panel',
-    links: { repo: 'https://github.com/Deadsunx/Ai-travel-Agent' },
+    previewAlt: 'The deployed Travel Desk, showing the trip prompt and the live source panel',
+    links: {
+      repo: 'https://github.com/Deadsunx/Ai-travel-Agent',
+      live: 'https://ai-travel-agent-delta-eight.vercel.app',
+    },
     tags: ['Python', 'LangGraph', 'FastAPI'],
     accent: 'ochre',
 
@@ -111,7 +193,7 @@ export const projects = [
       },
       {
         heading: 'The old planner is the control',
-        body: 'The deterministic pipeline the graph replaced was not deleted. It stays selectable per request, so both planners answer the same query and the comparison is reproducible. Without it, "the multi-agent version is better" is an assertion instead of a measurement.',
+        body: 'The deterministic pipeline the graph replaced was not deleted. It stays selectable per request — the deployed app exposes the choice in its own header — so both planners answer the same query and the comparison is reproducible. Without it, "the multi-agent version is better" is an assertion instead of a measurement.',
       },
       {
         heading: 'Every source can fail safely',
@@ -146,7 +228,7 @@ export const projects = [
       'Graph planner beats the pipeline 15/16 to 13/16 on golden queries, at roughly 17% more latency — both planners still selectable per request.',
       '129 tests covering the critic rules, the revision loop, graph construction and state, telemetry, and planner parity. No network, no services, running in CI on every push.',
       'Eval harness scores end-to-end runs without an LLM judge, including adversarial cases: an impossible budget, a 14-day trip, and deliberately conflicting interests.',
-      'Runs with no API keys at all — every external source degrades to a labelled fallback instead of failing.',
+      'Deployed and publicly reachable, running against a hosted model because the target cannot run a local one.',
     ],
 
     stack: [
@@ -156,6 +238,82 @@ export const projects = [
       { name: 'Next.js 14', why: 'App Router frontend; the itinerary renders as it is written.' },
       { name: 'PostgreSQL + Redis', why: 'Itineraries and sessions; caching and rate limiting.' },
       { name: 'Docker Compose', why: 'One command brings the whole stack up, keys optional.' },
+    ],
+  },
+
+  {
+    slug: 'strand',
+    title: 'Strand',
+    status: 'Live',
+    timeline: '2026',
+    role: 'Solo — backend hardening, frontend, transfer core',
+    tagline: 'Files that never touch a server.',
+    summary:
+      'Peer-to-peer file sharing over WebRTC — no cloud storage, no size limit, encrypted end to end by the browser’s own transport. A GPL-3.0 rebuild of DropSilk with a hardened backend and a from-scratch React frontend on a headless transfer core.',
+    preview: strandPreview,
+    previewAlt: 'The Strand interface, showing the peer-to-peer connection and flight code entry',
+    links: {
+      repo: 'https://github.com/Deadsunx/strand',
+      live: 'https://strand-silk.vercel.app',
+    },
+    tags: ['TypeScript', 'WebRTC', 'Bun'],
+    accent: 'indigo',
+
+    problem:
+      'Sending someone a large file normally means uploading it to a third party first, waiting, and trusting them with the contents. The transfer is the easy part; the hard part is that the obvious architecture — a server in the middle — is the one that costs money at scale and holds data it has no reason to hold.',
+
+    build: [
+      {
+        heading: 'The server never sees the file',
+        body: 'The backend does signalling only: it introduces two browsers to each other and then gets out of the way. Once the peer connection is established the bytes travel directly between devices, encrypted by WebRTC’s transport. Chat and screen sharing ride the same connection.',
+      },
+      {
+        heading: 'A headless transfer core',
+        body: 'The transfer logic lives in `src/core` with no React and no DOM — connection state, chunking, backpressure and the protocol are all framework-agnostic, with the React app sitting on top as one possible consumer. The part that is hard to get right is the part that is easiest to test.',
+      },
+      {
+        heading: 'Honest about the network',
+        body: 'Two devices on the same machine or LAN connect directly. Cross-network peers need a TURN relay, and that is documented rather than hidden — as is the cold-start delay on free hosting tiers, which the demo warns about before you hit it.',
+      },
+    ],
+
+    diagram: 'p2p',
+
+    decisions: [
+      {
+        choice: 'A headless core with React on top',
+        instead: 'wiring WebRTC directly into components',
+        because:
+          'Connection state, chunking and backpressure have nothing to do with rendering, and burying them in components makes both harder to reason about. Separated, the transfer core can be tested without a browser and reused by a different frontend — and the React layer stays small enough to read.',
+      },
+      {
+        choice: 'Staying wire-compatible with the original backend protocol',
+        instead: 'designing a cleaner protocol of my own',
+        because:
+          'This is a rebuild of an existing GPL project. Keeping the protocol identical meant the new frontend could be developed against the known-good original backend, so any bug was unambiguously mine. A better protocol would have made every failure ambiguous during the one phase where I needed certainty.',
+      },
+      {
+        choice: 'GPL-3.0 with the derivation stated up front',
+        instead: 'relicensing quietly',
+        because:
+          'Strand is a derivative of DropSilk, which is GPL-3.0. That obliges the same licence and a clear record of what changed — and it belongs in the README\'s opening, not a footnote. Getting licensing right is part of the work, not paperwork attached to it.',
+      },
+    ],
+
+    outcomes: [
+      'Files transfer directly between devices — no upload step, no server-side storage, no size ceiling imposed by a host.',
+      'Transfer core runs with no React and no DOM, so the protocol can be exercised outside a browser.',
+      'Whole stack — frontend, signalling backend, Postgres — comes up with one Docker command.',
+      'Live and usable now, with the free-tier cold start called out rather than papered over.',
+    ],
+
+    stack: [
+      { name: 'WebRTC', why: 'The direct peer channel, and the encryption that comes with it.' },
+      { name: 'React 19 + TypeScript', why: 'Frontend, strict mode, on top of a headless core.' },
+      { name: 'Bun + Hono', why: 'Signalling backend — fast to start, small to reason about.' },
+      { name: 'PostgreSQL (Kysely)', why: 'Flight state, typed end to end.' },
+      { name: 'Cloudflare TURN', why: 'Relay for peers that cannot reach each other directly.' },
+      { name: 'Docker Compose', why: 'The entire stack in one command.' },
     ],
   },
 
@@ -239,7 +397,7 @@ export const projects = [
     role: 'Solo',
     tagline: 'Grouping a catalogue nobody labelled.',
     summary:
-      'End-to-end unsupervised pipeline that groups the Netflix catalogue by content similarity — TF-IDF over show metadata, dimensionality reduction, then K-Means, hierarchical and DBSCAN compared against each other.',
+      'End-to-end unsupervised pipeline that groups the Netflix catalogue by content similarity — TF-IDF over show metadata, TruncatedSVD, then K-Means, Agglomerative and DBSCAN compared against each other.',
     preview: netflixPreview,
     previewAlt: 'Ward hierarchical clustering dendrogram produced by the notebook',
     previewClass: 'plot-dark',
@@ -257,11 +415,11 @@ export const projects = [
       },
       {
         heading: 'Reduce before clustering',
-        body: 'TF-IDF output is high-dimensional and sparse, where distance stops being meaningful. Dimensionality reduction runs first so the clustering algorithms operate in a space where proximity actually corresponds to similarity.',
+        body: 'TF-IDF output is high-dimensional and sparse, where distance stops being meaningful. TruncatedSVD runs first so the clustering algorithms operate in a space where proximity actually corresponds to similarity.',
       },
       {
         heading: 'Three algorithms, compared',
-        body: 'K-Means, hierarchical (Ward), and DBSCAN are run over the same reduced representation. They disagree, and the disagreement is the finding — each encodes a different assumption about what a cluster is.',
+        body: 'K-Means, Agglomerative (Ward), and DBSCAN are run over the same reduced representation. They disagree, and the disagreement is the finding — each encodes a different assumption about what a cluster is.',
       },
     ],
 
@@ -296,7 +454,7 @@ export const projects = [
 
     stack: [
       { name: 'Python', why: 'The whole pipeline.' },
-      { name: 'scikit-learn', why: 'TF-IDF, reduction, and all three clustering algorithms.' },
+      { name: 'scikit-learn', why: 'TF-IDF, TruncatedSVD, and all three clustering algorithms.' },
       { name: 'pandas', why: 'Cleaning and reshaping the catalogue.' },
       { name: 'matplotlib', why: 'Dendrograms and cluster plots — the actual output.' },
     ],
@@ -304,10 +462,30 @@ export const projects = [
 ]
 
 /*
- * Built, but with nothing public to show. Listed honestly as text rather
- * than given a case-study page that would obviously be padding.
+ * Real, public, and linked — but without the depth to carry a page of their
+ * own. Listed as text rather than padded into case studies.
  */
 export const alsoBuilt = [
+  {
+    title: 'MarkItDown Studio',
+    note: 'Windows desktop app and web app that converts PDFs, Office files, HTML, images and URLs to clean Markdown. The server binds to loopback inside the same process, so nothing leaves the machine.',
+    tags: ['Python', 'FastAPI', 'Desktop'],
+    repo: 'https://github.com/Deadsunx/markitdown-studio',
+  },
+  {
+    title: 'FORGEWEB',
+    note: 'Bilingual one-page studio site, backed by an unusually complete test suite — WCAG 2.1 AA contrast and focus audits, dead-code detection, serverless form validation, and Open Graph checks.',
+    tags: ['React', 'Vite', 'a11y'],
+    repo: 'https://github.com/Deadsunx/forgeweb',
+    live: 'https://forgeweb-hazel.vercel.app',
+  },
+  {
+    title: 'Daily News',
+    note: 'A static news site that publishes a fresh edition every morning from scheduled JSON drops. No server, no database, no framework — a tiny Node build script and two deploy targets.',
+    tags: ['Node', 'Static', 'Automation'],
+    repo: 'https://github.com/Deadsunx/daily-news',
+    live: 'https://daily-news-steel.vercel.app',
+  },
   {
     title: 'SiniTech Dashboard',
     note: 'Prototype business dashboard for a school-management platform — enrolment, fees, and staff views in one place.',

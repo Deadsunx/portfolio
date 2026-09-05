@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portfolio-two-amber-7tob6jqd7n.vercel.app/sitemap.xml
+Sitemap: https://oumar-tirera.vercel.app/sitemap.xml

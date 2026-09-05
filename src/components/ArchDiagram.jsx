@@ -18,6 +18,29 @@ const DIAGRAMS = {
       { label: 'Synthesis', sub: 'streamed over SSE' },
     ],
   },
+  rag: {
+    caption:
+      'Every stage is a switch in a config file, so every stage can be turned off and measured instead of argued about.',
+    nodes: [
+      { label: 'Parse', sub: '3,056 articles' },
+      { label: 'Chunk', sub: 'structure-aware' },
+      { label: 'Retrieve', sub: 'dense + BM25' },
+      { label: 'Rerank', sub: 'cross-encoder', accent: true },
+      { label: 'Generate', sub: 'cite, or abstain' },
+      { label: 'Evaluate', sub: 'ablation harness' },
+    ],
+  },
+  p2p: {
+    caption:
+      'The backend introduces the two browsers and then gets out of the way. The file never touches a server.',
+    nodes: [
+      { label: 'Create flight', sub: 'share the code' },
+      { label: 'Signal', sub: 'WebSocket, backend' },
+      { label: 'Connect', sub: 'ICE · TURN if needed' },
+      { label: 'Direct channel', sub: 'WebRTC, encrypted', accent: true },
+      { label: 'Transfer', sub: 'device to device' },
+    ],
+  },
   ledger: {
     caption: 'The commit happens before the outcome exists. That ordering is the whole project.',
     nodes: [

@@ -28,7 +28,9 @@ function Card({ project, index, fluid = false }) {
           className="absolute inset-0 bg-gradient-to-t from-night/70 via-transparent to-transparent"
           aria-hidden="true"
         />
-        <span className="glass-deep absolute left-4 top-4 rounded-full px-3 py-1 font-mono text-[11px] text-paper/75">
+        {/* Solid dark chip, not glass: previews range from near-black to
+            cream, and a translucent badge vanishes on the light ones. */}
+        <span className="absolute left-4 top-4 rounded-full border border-white/15 bg-night/80 px-3 py-1 font-mono text-[11px] text-paper backdrop-blur-sm">
           {project.status}
         </span>
       </div>
@@ -178,7 +180,7 @@ export default function Work() {
       <div className="mx-auto max-w-[1180px] px-6 sm:px-10">
         <SectionHead
           kicker="03 / Selected work"
-          title="Four built, documented, and running."
+          title="Six built, documented, and running."
           lead="Each one has a page with the problem, the architecture, and the tradeoffs I actually made — including the ones that went the wrong way first."
         />
       </div>
@@ -200,8 +202,36 @@ export default function Work() {
               <div className="flex flex-col gap-2 border-t border-white/8 py-5 sm:flex-row sm:items-baseline sm:gap-8">
                 <div className="display-tight w-[220px] shrink-0 text-[16px]">{item.title}</div>
                 <p className="flex-1 text-[14.5px] leading-relaxed text-paper/55">{item.note}</p>
-                <div className="flex shrink-0 gap-2 font-mono text-[12px] text-paper/55">
-                  {item.tags.join(' · ')}
+                <div className="flex shrink-0 items-center gap-4">
+                  <span className="font-mono text-[12px] text-paper/55">
+                    {item.tags.join(' · ')}
+                  </span>
+                  {(item.live || item.repo) && (
+                    <span className="flex items-center gap-2">
+                      {item.live && (
+                        <a
+                          href={item.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${item.title} live site`}
+                          className="text-paper/55 transition-colors hover:text-ochre"
+                        >
+                          <ExternalLinkIcon className="h-4 w-4" />
+                        </a>
+                      )}
+                      {item.repo && (
+                        <a
+                          href={item.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`${item.title} on GitHub`}
+                          className="text-paper/55 transition-colors hover:text-ochre"
+                        >
+                          <GitHubIcon className="h-4 w-4" />
+                        </a>
+                      )}
+                    </span>
+                  )}
                 </div>
               </div>
             </Reveal>

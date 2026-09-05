@@ -5,9 +5,9 @@ import { useMotionBudget } from '../lib/env.js'
 
 /* Only facts that can be checked against the repositories. */
 const FACTS = [
-  { value: 6, label: 'projects built' },
-  { value: 4, label: 'public repositories' },
-  { value: 2, label: 'systems running unattended, daily' },
+  { value: 10, label: 'public repositories' },
+  { value: 7, label: 'live deployments' },
+  { value: 3, label: 'systems running unattended, daily' },
 ]
 
 function Counter({ to }) {

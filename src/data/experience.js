@@ -17,10 +17,11 @@ export const experience = [
     period: '2025 — Present',
     icon: 'code',
     points: [
+      'Kora — a retrieval system for OHADA business law, and the ablation study that judged it.',
       'Hindsight — a public prediction engine that scores its own calls daily.',
+      'Strand — peer-to-peer file transfer over WebRTC, with no server in the middle.',
       'Ephemeris — a self-building archive running on scheduled automation.',
       'Netflix content clustering — an unsupervised NLP pipeline over the catalogue.',
-      'SiniTech — prototype dashboard for a school-management platform.',
       'This site — React, Tailwind v4, and a hand-built depth and motion system.',
     ],
   },
@@ -32,7 +33,7 @@ export const capabilities = [
     kicker: '01',
     title: 'Applied ML',
     body: 'Turning unlabelled data into something structured enough to act on — feature engineering, clustering, and evaluation that survives someone checking it.',
-    stack: ['Python', 'scikit-learn', 'pandas', 'NLP'],
+    stack: ['Python', 'scikit-learn', 'RAG', 'Evaluation'],
   },
   {
     icon: 'flow',
