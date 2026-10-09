@@ -477,7 +477,7 @@ export const alsoBuilt = [
     note: 'Bilingual one-page studio site, backed by an unusually complete test suite — WCAG 2.1 AA contrast and focus audits, dead-code detection, serverless form validation, and Open Graph checks.',
     tags: ['React', 'Vite', 'a11y'],
     repo: 'https://github.com/Deadsunx/forgeweb',
-    live: 'https://forgeweb-hazel.vercel.app',
+    live: 'https://www.forgewebafrica.com',
   },
   {
     title: 'Daily News',
